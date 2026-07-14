@@ -1,0 +1,13 @@
+car_id,car_model,car_type,branch_id,daily_rate,fuel_type
+201,Swift Dzire,Sedan,1,2200,Petrol
+202,Hyundai Creta,SUV,1,3500,Diesel
+203,Toyota Innova,MUV,2,4200,Diesel
+204,Honda City,Sedan,2,2600,Petrol
+205,Tata Nexon,SUV,3,3300,Electric
+206,Maruti Ertiga,MUV,3,3800,Petrol
+207,Kia Seltos,SUV,4,3600,Diesel
+208,Renault Kwid,Hatchback,4,1600,Petrol
+209,Mahindra XUV700,SUV,1,4800,Diesel
+210,Hyundai i20,Hatchback,2,1900,Petrol
+211,MG ZS EV,SUV,3,4500,Electric
+212,Toyota Fortuner,SUV,4,5500,Diesel

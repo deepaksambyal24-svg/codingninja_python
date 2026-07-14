@@ -1,0 +1,15 @@
+# you cannot initiliaze an emply set to do this use set()
+product=set()
+print(type(product))
+product.add("chips")
+print(type(product))
+print(product)
+product.add("pencils")
+print(type(product))
+for el in  product:
+    print(el)
+print( "pencils" in product)
+# give true or false of occurance of an element
+product.remove("pencils")
+product.add("erasers")
+print(type(product))
