@@ -1,0 +1,12 @@
+# in this formulae is to print 'A + i-2
+
+k=int(input())
+# is to print 'A+K-1
+# WHEN WE STORE A CHAR IN COMPUTER WE STORE ASCII VALUE FOR THAT CHAR
+
+# find ascii of A
+# ADD K-1 IN INT
+# FIND CHAR CORESSPONDINGLY
+
+print(ord('b'))
+print(char(66))
