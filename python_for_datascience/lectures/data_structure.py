@@ -159,6 +159,39 @@ print(c.index(6))
 # REVERSE A LIST BY USING reverse () function
 a.reverse()
 print(a)    # --> reverse the list
+#-===================================================================================================================
+# MAP FUNCTION --> the map() function is a build in python function used to apply the function to every element of an iterable list
+# SYNTAX --> map(function,iterable )  function is the a function to apply and iterable is a list tuple set string
+
+
+# eg ------> square of every number -->
+numbers=[1,2,3,4,5]
+squared_numbers=list(map(lambda x: x**2, numbers))
+print(squared_numbers)
+# here lambda is the  an anonymous unnamed function  here x is the parameter and x**2 is the expressionn
+# it means take one value  called x and return its sqaure
+
+# CONVERT strings to uppercase
+fruits=['apple','banana','pear','orange']
+result=map(str.upper,fruits)
+print(result)
+
+
+
+# convert strings to integers
+numbers=[1,2,3,4,5,6]
+result=map(int,numbers)
+print(result)
+
+
+
+def cube(x):
+    return x**3
+numbers=[1,2,3,4,5]
+result=map(cube,numbers)
+print(list(result))
+
+#=======================================================================================================================
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
