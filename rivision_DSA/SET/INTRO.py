@@ -1,0 +1,1 @@
+# SETS --> sets are mutable , on the base of environ ment the nature of set can be changed ie ordering etc
