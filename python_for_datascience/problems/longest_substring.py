@@ -1,17 +1,14 @@
-string = input()
+string=input()
+set_substring=set(string)
 
-empty_string = ""
-pointer = 0
-count = 0
-
-for ch in string:
-    while ch in empty_string:
-        empty_string = empty_string[1:]
-        pointer += 1
-
-    empty_string += ch
-
-    if len(empty_string) > count:
-        count = len(empty_string)
-
-print(count)
+if len(string)==1:
+    print(string)
+else:
+    longest_substring=""
+    for i in range(len(string)):
+        for j in range(i+1,len(string)+1):
+            substring=string[i:j]
+            if len(substring)==len(set(substring)):
+                if len(substring)>len(longest_substring):
+                    longest_substring=substring
+    print(longest_substring)
