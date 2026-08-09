@@ -4,14 +4,23 @@ test_cases = [19, 2, 7, 23, 4, 16, 13]
 
 
 # Write your code here
+for num in test_cases:
+        current=num
+        seen=[]
+        while current not in seen:
+            square_sum = 0
+            for digit in str(current):
+                 first=int(digit)**2
+                 square_sum += first
 
-def happy_number(n):
+            seen.append(current)
+            current=square_sum
 
-    square_list=[]
-    for i in test_cases:
-        last_dig=i%10
-        square_list.append(last_dig)
 
+        if current == 1:
+            print(f"Is {num} a happy number? True")
+        else:
+            print(f"Is {num} a happy number? False")
 
 
 

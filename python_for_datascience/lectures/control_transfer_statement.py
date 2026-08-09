@@ -109,7 +109,7 @@ orders =[{'id':'0101','status':'confirmed','type':'regular'},
          {'id':'0103','status':'confirmed','type':'regular'},
          {'id':'0104','status':'confirmed','type':'regular'},]
 for o in orders:
-    if orders['status']=='confirmed':
+    if o['status']=='confirmed':
         print("fraud found in ",o['id'])
         print("order processing stopped ")
         break
@@ -150,3 +150,17 @@ while seats<=10:
             continue
         seats-=1
     print()
+
+
+for num in range(-1, 21):
+    if num <= 1:
+        print(num, "is not a prime number")
+    elif num > 1:
+        # check for factors
+        for i in range(2, num):
+            if (num % i) == 0:
+                print(num, "is not a prime number")
+                break
+        else:
+                print(num, "is a prime number")
+                break
