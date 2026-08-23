@@ -1,0 +1,5 @@
+daily sales report
+revenue:125000
+orders:320
+customer:c101
+complaint:order delivered 

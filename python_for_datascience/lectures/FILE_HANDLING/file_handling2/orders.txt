@@ -1,0 +1,5 @@
+laptop , 65000
+phone , 30000
+tv, 55000
+headphone , 5000
+tablet , 25000

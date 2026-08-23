@@ -1,0 +1,3 @@
+januarysales : 500000
+februarysales : 65000
+march sales : 7000

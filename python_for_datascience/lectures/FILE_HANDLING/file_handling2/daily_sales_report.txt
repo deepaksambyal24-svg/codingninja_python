@@ -1,0 +1,8 @@
+DAILY SALES REPORT
+_____________________________
+total_sales : 875000
+total_orders : 425
+DAILY SALES REPORT new entry
+_____________________________
+complaint1 : customer101 gone wrong product
+customer101 gone wrong product

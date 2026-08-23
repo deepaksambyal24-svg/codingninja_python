@@ -1,0 +1,6 @@
+daily business report
+date:2026-08-20
+profit:109500
+cost:110000
+revenue:150000
+margin:220.0

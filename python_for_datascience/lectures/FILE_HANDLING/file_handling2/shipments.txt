@@ -1,0 +1,3 @@
+s001,mumbai,delivered
+s002,delhi,pending
+s003,banglore,delivered

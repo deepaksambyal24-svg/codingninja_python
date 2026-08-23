@@ -165,3 +165,219 @@ def profit () :
 
 
 profit()
+
+
+
+# RETURNING----> return multiple values
+
+def  sales_summary(sales) :
+    total=sum(sales)
+    highest=max(sales)
+    return total,highest
+sales_summary([2000,45000,10000,900000])
+
+# show the net salary and the tax amount from the salary
+def  salary_summary(salary) :
+    tax=salary*.10
+    paid_salary=salary-tax
+    return paid_salary,tax
+print(salary_summary(2000))
+
+# passing a fucntion as an argument:
+# def processs (function,data)
+#           return function(data)
+
+# apply a discount strategy :
+def regular_discount(price):
+    return price*0.95
+def premium_dicount(price):
+    return price*0.90
+def calculate_price(discount_function,price):
+    return discount_function(price)
+calculate_price(premium_dicount,1000)
+
+# pass a function to show the final salary after adding the bonus
+
+def bonus(salary):
+    return .10*salary
+
+def cal_salary(bonus_func, salary):
+    return salary + bonus_func(salary)
+
+print(cal_salary(bonus,10000))
+
+
+#------------------------------------------------------------------------------------------------------------#
+
+
+# SCOPE ------> SCOPES ARE OF TWO TYPES     GLOBAL AND LOCAL SCOPE
+
+# LOACAL VARIABLES ---> variables created inside a function are called
+# local variables and can only be accessed inside the function
+
+
+# GLOBAL VARIABLE --> variables created outside a function are
+# called global variables and can be accessed anywhere in the program
+
+
+# global scope /variable
+# company tax rate
+tax_rate=0.18
+def calculate_tax(amount):
+    return amount*tax_rate
+calculate_tax(400000)
+
+# GLOBAL VARIABLE
+# show the name of the country
+country="india"
+def locaion():
+    print(country)
+
+
+locaion()
+
+
+# local variable
+
+def profit():
+    revenue=500000
+    cost=300000
+    profit=revenue-cost
+    print(profit)
+profit()
+
+
+# calculate revenue using qty and price to show both the scope of variable
+
+
+price=100  # global
+
+
+def calculte_price():
+    quantity=10          # local
+    ttl_price=price*quantity
+    print(ttl_price)
+calculte_price()
+
+
+
+# update values of global variable :
+
+# def function-name():
+#      global variable_name
+#   variable_name=new_value
+
+
+target=10000000
+def update_target():
+    global target
+    target=1500000
+
+print(update_target())
+
+
+# change the session mode of a classroom from offline to online
+
+
+mode="offline"
+
+def change_mode():
+    global mode
+    mode="online"
+
+change_mode()
+print(mode)
+
+
+
+# NAME SPACES ---> where does python keep track of names and their objects
+
+# there are three types of namespace
+
+# 1)  BUILT IN ----> print,len,sum,max,min
+
+# print(len(10,20,30) len is a built in function which is used to find the length of an object
+
+# profit=1000 so both are called as name space
+
+
+# 2) GLOBAL
+# 3) LOCAL
+
+
+# LEGB RULE ---> LOCAL ----> ENCLOSING-------> GLOBAL ------> BUILT IN  (FINDING RULES)
+
+
+# LOCAL ----
+x=10
+def test():
+    x=200
+    print(x)
+test()
+
+
+# E ----> ENCLOSING  ie function inside another function
+
+
+def outer():
+    x=200
+    def inner():
+        print(x)
+
+outer()
+
+
+# G ---> global
+
+x=300
+def outer():
+    def inner():
+        print(x)
+    inner()
+
+
+# B---
+def test():
+    print(len[1,2,3,4,5])
+
+company_tax=0.18                        # 3) global function
+def finance_department():
+    department_tax=0.12             # 2) enclosed fucntion
+    def tax_cal(amount):
+        special_tax=0.05                # 1)  locaal inner most
+        print(special_tax)
+        print(department_tax)
+        print(company_tax)
+        print(len([1,2,3,4,5]))             #  4) built in
+    tax_cal(10000)
+finance_department()
+
+
+#  VARIABLE SHADOW ---> variable shadow means the closer variable
+#  temporarily hides variable with same name
+# Variable shadowing means a variable in an inner scope uses the same name as
+# a variable from an outer scope, temporarily hiding the outer variable.
+
+'''The purpose of shadowing isn't to change the outer variable; it lets an 
+inner scope use the same name for a different value without affecting the outer variable.
+For example, a function can safely use x for its own work while the outside x remains unchanged.'''
+
+
+x=10
+def out():
+    x=20
+    def inner():
+        x=40
+        print(x)
+    inner()
+
+# multiple nested function
+
+def sales_calculator(price,qty):
+    def revenue():
+        return price*qty
+    def tax():
+        return revenue()*.18
+    return revenue(), tax()
+
+sales_calculator(100, 10)

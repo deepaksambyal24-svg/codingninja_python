@@ -7,3 +7,5 @@ while bina>0:
     bina=bina//10
     power_of_2*=2
 print(ans)
+
+ 
