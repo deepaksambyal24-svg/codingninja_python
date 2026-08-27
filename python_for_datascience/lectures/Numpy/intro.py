@@ -133,6 +133,15 @@ sales=np.array([100,120,130,125,150,170,180])
 first_five=sales[:5]
 print(first_five)
 
+sales=np.array([100,120,130,125,150])
+alternate=sales[::2]
+print(alternate)
+
+
+# two dimensional slicing
+
+sales=np.array([[10,20,30,40],[50,60,70,80],[90,100,110,120],[130,140,150,160]])
+print(sales[1:3,1:3])  # to get 60,70,100,110 1:3 for rows and 1: 3 is for columns 
 
 
 
