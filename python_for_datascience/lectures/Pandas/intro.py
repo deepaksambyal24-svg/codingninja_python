@@ -139,3 +139,6 @@ df.drop(index=[4,5])
 df["Embarked"].replace("Q","Queenstown")
 # to remove multiple values
 df["Embarked"].replace({"Q":"queenstown","S":"Southampton","C":"chesboug"})
+
+
+
