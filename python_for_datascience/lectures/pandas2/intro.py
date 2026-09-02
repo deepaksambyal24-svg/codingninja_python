@@ -51,3 +51,17 @@ print(customers.info())  # shows information about the dataframe how many
 print(customers.describe())  # shows statistical information about the dataframe
 print(customers.T)  # shows the transpose of the dataframe
 print(customers.transpose())
+
+
+# concatenation
+customers['full_name'] = customers['first_name'] + ' ' + customers['last_name']
+print(customers[['full_name']])
+
+
+# adding the rows ie adding new customers to the existing dataframe
+new_customers={'id':1001,'first_name':'Aman','last_name':'Kumar','email':'aman.kumar@example.com','gender':'Male',
+               'street':'Aman Kumar','streetname':'Aman Kumar','city':'Aman Kumar','state':'Aman Kumar','country':'Aman Kumar','zipcode':'Aman Kumar'}
+customers.loc[len(customers)] = new_customers
+customers.loc[1002]=new_customers
+
+
