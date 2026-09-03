@@ -1,4 +1,6 @@
 import pandas as pd
+from sklearn.gaussian_process.kernels import Product
+
 customers=pd.read_csv('customers.csv')
 print(customers  )
 products=pd.read_csv('products.csv')
@@ -63,5 +65,85 @@ new_customers={'id':1001,'first_name':'Aman','last_name':'Kumar','email':'aman.k
                'street':'Aman Kumar','streetname':'Aman Kumar','city':'Aman Kumar','state':'Aman Kumar','country':'Aman Kumar','zipcode':'Aman Kumar'}
 customers.loc[len(customers)] = new_customers
 customers.loc[1002]=new_customers
+
+
+ # deleting and renaming rows /column s:
+ # remove unwanted columns from the dataframe
+
+#customers.drop(columns=['Unnamed: 0'], inplace=True)   # inplace means that the
+# changes will be made to the original dataframe and not a copy of it
+#products.drop(columns="Unnamed: 0", inplace=True)\
+print(products.head(10))
+
+
+# Rename cost column to unit_cost
+products.rename(columns={"cost": "unit_cost"}, inplace=True)
+print(products.head(10))
+
+
+###################################################################################################################
+
+
+# UNIQUE VALUES AND NUNIQUE VALUES
+# unique values  ---> it shows the unique names from the column
+# nunique (0 ---> gives the number of unique values form the column
+
+
+# unique ()
+print(customers['gender'].unique() ) # it shows the unique names from the column
+
+# count the gender categories
+
+print(customers['gender'].nunique())
+
+print(customers.columns)
+
+print(customers['city'].nunique())
+
+
+# concantenation : stacking dataframes by rows (axis=0) or columns (axis=1) just like union join in sql
+
+print(purchases.shape)
+first_half=purchases.iloc[:3000]
+second_half=purchases.iloc[3000:]
+print(first_half)
+print(second_half)
+
+# join both first_half and second_hald as stack
+
+all_purchases=pd.concat([first_half,second_half],axis=0)
+print(all_purchases )  # (6000, 4) 6000 rows and 4 columns
+
+
+# divide the customers dataframe into two halves  for basic info and address info
+
+basic_info=[['customer_id','first_name','last_name','email','gender']]
+address_info=[['customer_id','street','streetname','city','state','country','zipcode']]
+print(basic_info)
+print(address_info)
+
+# customers_report=pd.concat([basic_info,address_info],axis=1)
+#
+# print(customers_report)
+
+
+# MERGE  AND JOIN
+
+
+# MERGE ---> combining tables through common columns or indices just like join in sql
+
+
+# purchase id ,customerid,name
+
+customer_purchase=pd.merge(purchases,customers[['id','first_name']],
+                           left_on='customer_num',right_on='id',how="left",suffixes=('_purchases','_customers'))
+print(customer_purchase)  # left join ---> all the rows from the left table and matching rows from the right table
+# right join ---> all the rows from the right table and matching rows from the left table
+# inner join ---> only the matching rows from both tables
+# outer join ---> all the rows from both tables and matching rows from both tables
+#
+
+
+
 
 
