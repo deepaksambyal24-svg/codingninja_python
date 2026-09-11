@@ -1,3 +1,0 @@
-tx101,2500,deposit
-tx102,5000,withdraw
-tx103,1000,
