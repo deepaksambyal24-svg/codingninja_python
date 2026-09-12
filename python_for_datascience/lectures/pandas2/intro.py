@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.gaussian_process.kernels import Product
+
 
 customers=pd.read_csv('customers.csv')
 print(customers  )
@@ -146,4 +146,15 @@ print(customer_purchase)  # left join ---> all the rows from the left table and 
 
 
 
+# data type conversion ----->
 
+# convert puchase date to datetime
+
+# purchases["purch_date"]=pd.to_datetime(purchases["purch_date"])
+# print(purchases["purch_date"].datypye)
+
+
+
+# convert paid to numeric
+
+purchases["paid"].astype(float)
