@@ -55,6 +55,7 @@ complaint='order delivered '
 with open("new_program.txt",'a') as file:
     file.write(f'customer:{customer}\n')
     file.write(f'complaint:{complaint}\n')
+    file.reada
 
 
 
