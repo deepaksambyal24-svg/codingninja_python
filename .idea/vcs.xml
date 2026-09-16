@@ -2,5 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/codingninja_python" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/conding_ninja_datagrip_sql" vcs="Git" />
   </component>
 </project>
