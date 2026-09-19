@@ -58,3 +58,37 @@ recovered['Province/State']=(confirmed["Province/State"].fillna('all province'))
 print(confirmed.isnull().sum())
 print(deaths.isnull().sum())
 print(recovered.isnull().sum())
+
+
+# peak daily cases  in germany france,italy
+countries=["Germany","France","Italy"]
+for c in countries:
+    data=confirmed[confirmed['Country/Region'] == c]
+    cumulative=data.iloc[:,4:].sum()
+    daily_cases=cumulative.diff()
+    print(c)
+    print('peak cases:',daily_cases.max())
+    print("peak date:", daily_cases.idxmax())
+
+
+# recovery rate : canada vs australia
+
+# recovery rate = recovered/confirmed
+
+for c in ['Canada','Australia']:
+    confirmed_cases=confirmed[confirmed['Country/Region'] == c]["12/30/20"].sum()
+    recovered_cases=recovered[recovered['Country/Region'] == c]["12/30/20"].sum()
+    rate=recovered_cases/confirmed_cases
+    print(c,rate)
+
+# convert wide data into long data
+death_long=deaths.melt(id_vars=["Province/State","Country/Region","Lat","Long"],var_name="Date",value_name="deaths")
+
+death_long['date']=pd.to_datetime(death_long.Date,format='%m/%d/%y')
+print(death_long)
+
+confirmed_long=confirmed.melt(id_vars=["Province/State","Country/Region","Lat","Long"],var_name="Date",value_name="confirmed")
+
+confirmed_long['date']=pd.to_datetime(confirmed.Date,format='%m/%d/%y')
+print(confirmed_long)
+
