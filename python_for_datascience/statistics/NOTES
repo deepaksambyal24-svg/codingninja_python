@@ -1,0 +1,57 @@
+#types of data and collection --> qualitative ,quantitative data ,discrete vs continuous data ,sampling and sampling tech
+# sapling techniques /measures of central tendency --> random stratified , cluster ,systematic
+
+# types of error occured in sampling bias and error
+# code demonstration of sampling
+# descriptive statistics ---> range iqr , variance and std deviation  ,skewness and kurtosis
+
+# probability in statistics -- events , sample space ,types of events and independent
+# conditional probability , bayes theorem
+# probability distribution ---> discrete variables and continuous variables ,normal and standard normal distribution
+# central limit theorem (CLT) ---> sampling distributions ,
+# HYPOTHESIS TESTING ---> STEPS IN HYPOTHESIS TESTING  , NULL AND ALTERNATE HYPOTHESIS , P VALUES ,CONCEPT OF P VALUE ,
+# SIGNIFICANCE LEVEL  (ALPHA )
+# HYPOTHESIS TESTING
+# CONFIDENCE INTERVAL -- CONFIDENCE INTERVALS AND THEIR RELATIONSHIP WITH HYPOTHESIS TESTING
+# IN PYTHON -- TYPES AND TYPES II ERRROR
+# STATISTICAL TEST --> T TEST Z TEST ANOVA , CHI SQUARE TEST
+# STATISTICAL TEST FOR BIVARIATE ANALYSIS
+
+
+
+BRANCH OF MATHEMATICS collection , organisation ,analysis, interpretation , presentation
+# describing the large population , inference , simplify the complex data , modeling the data pattern
+infromed decision makin g
+
+two branches of data descriptive and inferential statistics
+
+# descriptive - summarize and describe the main feature of a dataset . techniques are mean median central tendency
+mean ,median ,, node , var , and sd  and visulization
+
+INFERENTIAL STATISTICS --> Make inferences about a polulation based on a sample of data . hypotheis testing ,
+and confidence interval
+STATISTICS USED IN
+healthcare , business and marketing , sports ,social sciences
+ # statistical  is important for informed decision making
+
+ # qualitative data -- qualities ,attributes ,characterstics
+ # quantitavie data -- data that represents measurable quantities
+ # categorical data --> it is type of qualitative data  and values belongs to distinct of groups
+ and of two types -- ordinal data -- having meaningful and order ( ordinal--> order )
+ and second is cardinal data -- no meaningful order categorical order
+ # numerical data -- data represented by numbers
+ rating is numbmerical not quantitatictive acategrocial
+ height is quantitative numerical
+
+ quantitaive data distinguish on the basis of true zero  -- numercal data can be measured and ordered
+ interval data - no true zero values with eqal interval between values
+ ratio data ---- it  is also with equal interval but with true zero values
+ # true zero values --> temps has not mean zero is temp is absent but income can be zero
+ QUANTITATIVE DATA
+ DISCRETE DATA( number of children )  ---Data consisit of discreste separrate values which connot furhter sub divided into meaninfuly
+
+ CONTINUOUS DATA-- it can take any values between range ,height of people ,wieght of people 
+
+
+# DATA COLLECTION ---> THERE ARE ENORMOUS WAYS TO COLLECT THE DATA
+SURVEY
