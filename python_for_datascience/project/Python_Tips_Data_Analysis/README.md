@@ -2,17 +2,17 @@
 
 ## Project Overview
 
-A Python-based data analysis and visualization project using the Tips dataset to explore customer behavior, spending patterns, gender distribution, and tipping trends.
+A Python-based data analysis and visualization project using the Tips dataset to explore customer spending, tipping patterns, gender distribution, and relationships between total bills and tips.
 
 ## Analysis Performed
 
-- Data exploration and filtering
-- Customer count by day
-- Average tip analysis
-- Gender distribution analysis
-- Total bill vs. tip analysis
-- Grouped data analysis
-- Correlation analysis
+- Loaded and explored the Tips dataset using Pandas
+- Analyzed customer count by day
+- Calculated average tips by day
+- Examined gender distribution across selected days
+- Compared total bills and tips using scatter plots
+- Performed grouped analysis by day, gender, and meal time
+- Calculated a correlation matrix for numerical variables
 
 ## Visualizations
 
@@ -24,8 +24,25 @@ A Python-based data analysis and visualization project using the Tips dataset to
 
 ## Tools & Libraries
 
-Python, Pandas, NumPy, Matplotlib, Seaborn
+- Python
+- Pandas
+- Matplotlib
+- Seaborn
 
 ## Skills Demonstrated
 
-Python Programming, Data Analysis, Exploratory Data Analysis (EDA), Data Filtering, Data Aggregation, Data Visualization, Correlation Analysis and Data Storytelling.
+- Python Data Analysis
+- Exploratory Data Analysis (EDA)
+- Data Filtering
+- Data Aggregation
+- Grouped Analysis
+- Data Visualization
+- Correlation Analysis
+- Data Interpretation
+
+## Project Structure
+
+```text
+Python_Tips_Data_Analysis/
+├── README.md
+└── tips_analysis.py
