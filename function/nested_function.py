@@ -1,10 +1,8 @@
-def user_billing_details(name,address,phone_number):
-    print ( "nameis ", name,"address of the user is ", address ,"phone number is ", phone_number)
-
-
-def payment_details(name,address,phone_number):
-    #calling user billing function
-    user_billing_details(name,address,phone_number)
-    return "credit card","upi"
-payment_option= payment_details("deekpak","39","8888888")
-print(payment_option)
+def user_billing_details(name,address,phone):
+    print ("name",name,"address",address,"phone",phone)
+def payment_detail(name,address,phone):
+    #calling billing details
+    user_billing_details(name,address,phone)
+    return "credit card"
+pay = payment_detail("","","123456")
+    print (pay)
