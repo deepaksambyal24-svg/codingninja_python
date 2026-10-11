@@ -17,7 +17,6 @@ datasets = {'Confirmed': confirmed,'Deaths': deaths,'Recovered': recovered}
 
 # STEP 2: CHECK DATA STRUCTURE
 
-
 for name, df in datasets.items():
     print(f"\n{name} dataset")
     print("Shape:", df.shape)
@@ -169,3 +168,203 @@ latest=confirmed[latest_date].to_frame(name='confirmed').reset_index(drop=True).
 latest.insert(0,'Date',latest_date)
 print(latest)
 
+
+# Make a copy so the original DataFrame remains unchanged
+deaths_copy = deaths.copy()
+
+# Convert column labels to strings
+deaths_copy.columns = [
+    str(col) if isinstance(col, pd.Timestamp) else col
+    for col in deaths_copy.columns
+]
+
+# Transform wide format to long format
+death_in_long = deaths_copy.melt(id_vars=['Province/State', 'Country/Region', 'Lat', 'Long'],var_name='Date',
+    value_name='Deaths')
+death_in_long['Date'] = pd.to_datetime(death_in_long['Date'],format='%Y-%m-%d %H:%M:%S')
+
+print(death_in_long)
+# TOP 5 COUNTRIES WITH HIGHEST AVERAGE DAILY DEATHS
+
+ttl_deaths = ( death_in_long[death_in_long['Date'] == latest_date]
+    .groupby('Country/Region')['Deaths']
+    .sum()
+    .sort_values(ascending=False))
+
+top_5 = ttl_deaths.head(5).reset_index(name='Deaths')
+
+# Convert deaths into lakhs for a more readable chart
+top_5['Deaths_Lakhs'] = top_5['Deaths'] / 100000
+
+plt.figure(figsize=(10, 6))
+
+sns.barplot(
+    data=top_5,
+    x='Country/Region',
+    y='Deaths_Lakhs'
+)
+
+plt.title('Top 5 Countries with Highest Reported COVID-19 Deaths')
+plt.ylabel('Total Deaths (in Lakhs)')
+plt.xlabel('Countries')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# total deaths evolved over time in the united states
+
+us_deaths=death_in_long[death_in_long['Country/Region']=='US']
+us_deaths_over_time=(us_deaths.groupby('Date')['Deaths'].sum().reset_index())
+
+us_deaths_over_time['Deaths_Lakh']=(us_deaths_over_time['Deaths']/1000000)
+
+#creating a line chart
+plt.figure(figsize=(10, 6))
+sns.lineplot(
+    data=us_deaths_over_time,
+    x='Date',
+    y='Deaths_Lakh'
+)
+plt.title('Evolution of Cumulative COVID-19 Deaths in the United States')
+plt.xlabel('Date')
+plt.ylabel('Total Deaths (in Lakhs)')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+# death cases in unites states evolved over time
+
+# DATA MERGING
+long_datasets = {}
+
+id_cols = ['Province/State', 'Country/Region', 'Lat', 'Long']
+
+for name, df in datasets.items():
+
+    date_cols = df.columns[4:]
+
+    df_long = (
+        df.set_index(id_cols)[list(date_cols)]
+        .stack()
+        .reset_index()
+    )
+
+    df_long.columns = id_cols + ['Date', name]
+
+    long_datasets[name] = df_long
+
+covid_data = pd.merge(
+    long_datasets['Confirmed'],
+    long_datasets['Deaths'][['Country/Region', 'Date', 'Deaths']],
+    on=['Country/Region', 'Date'],
+    how='inner'
+)
+covid_data = pd.merge(
+    covid_data,
+    long_datasets['Recovered'][['Country/Region', 'Date', 'Recovered']],
+    on=['Country/Region', 'Date'],
+    how='inner'
+)
+
+ # MONTH SUM FOR DEATHS, RECOVERED, CONFIRMED
+covid_data['Month'] = covid_data['Date'].dt.to_period('M')
+monthly_data = covid_data.groupby(['Country/Region', 'Month'])[['Confirmed', 'Deaths', 'Recovered']].sum().reset_index()
+print(monthly_data)
+
+
+# MONTHLY DATA FOR THE UNITED STATES, ITALY, BRAZIL
+
+countries = ['US', 'Italy', 'Brazil']
+
+filtered_data = monthly_data[monthly_data['Country/Region'].isin(countries)].copy()
+
+print(filtered_data.head())
+# CREATE A PLOT
+import matplotlib.pyplot as plt
+
+for country in countries:
+
+    country_data = filtered_data[
+        filtered_data['Country/Region'] == country
+    ].sort_values('Month')
+
+    plt.figure(figsize=(12, 6))
+
+    plt.plot(country_data['Month'].astype(str),
+             country_data['Confirmed'],
+             label='Confirmed Cases', marker='o')
+
+    plt.plot(country_data['Month'].astype(str),
+             country_data['Deaths'],
+             label='Deaths', marker='o')
+
+    plt.plot(country_data['Month'].astype(str),
+             country_data['Recovered'],
+             label='Recoveries', marker='o')
+
+    plt.title(f'Monthly COVID-19 Trends: {country}')
+    plt.xlabel('Month')
+    plt.ylabel('Sum of Daily Cumulative Totals')
+    plt.xticks(rotation=45)
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+
+# THREE COUNTRIES WITH HIGHEST AVERAGE DEASH RATE
+
+
+data_2020 = covid_data[ covid_data['Date'].dt.year == 2020].copy()
+
+#
+data_2020['Death_Rate'] = (data_2020['Deaths'] / data_2020['Confirmed'].replace(0, np.nan)) * 100
+
+
+avg_death_rate = (
+    data_2020.groupby('Country/Region')['Death_Rate']
+    .mean()
+    .dropna()
+    .sort_values(ascending=False)
+    .head(3)
+)
+
+print(avg_death_rate)
+
+# COMPARE TOTAL RECOVERIES AND DEATHS IN SOUTH AFRICA
+south_africa = covid_data[ covid_data['Country/Region'] == 'South Africa'].copy()
+sa_daily = south_africa.groupby('Date')[ ['Confirmed', 'Deaths', 'Recovered']].sum()
+latest = sa_daily.sort_index().iloc[-1]
+print("Total Confirmed Cases:", latest['Confirmed'])
+print("Total Deaths:", latest['Deaths'])
+print("Total Recoveries:", latest['Recovered'])
+
+if latest['Deaths'] != 0:
+    ratio = latest['Recovered'] / latest['Deaths']
+    print("Recovery-to-Death Ratio:", round(ratio, 2))
+else:
+    print("Recovery-to-Death Ratio: Undefined because deaths are zero.")
+
+# Filter US data for the required period
+us_data = covid_data[
+    (covid_data['Country/Region'] == 'US') &
+    (covid_data['Date'] >= '2020-03-01') &
+    (covid_data['Date'] <= '2021-05-31')
+].copy()
+
+us_daily = us_data.groupby('Date')[
+    ['Confirmed', 'Deaths', 'Recovered']
+].sum()
+us_monthly = us_daily.resample('ME').last()
+
+us_monthly['Recovery_Ratio'] = (
+    us_monthly['Recovered'] /
+    us_monthly['Confirmed'].replace(0, np.nan)
+) * 100
+
+print(us_monthly[['Confirmed', 'Recovered', 'Recovery_Ratio']])
+
+
+highest_month = us_monthly['Recovery_Ratio'].idxmax()
+
+print("\nMonth with highest recovery ratio:", highest_month.strftime('%B %Y'))
+print("Highest recovery ratio:", round( us_monthly.loc[highest_month, 'Recovery_Ratio'], 2), "%")
