@@ -115,3 +115,90 @@ plt.show()
 # the area under the curve is the value of y
 # P9X=150 =0 , Curve density of  x = 150 =.004 and P(X=160) =0 prob density for x =160 =.020
 # area under to point s is  ie x to be lying 150 and 160 cm will be equal # to area under the curve
+
+
+
+
+#  CENTRAL LIMIT THEOREM
+
+# LOC === MEAN , SCALE STD DEV ,
+
+weights = np.random.normal(loc=70, scale=15, size=1000)  # Mean=70kg, Std=15kg
+
+# Plot histogram
+
+plt.hist(weights, bins=15,density=True,edgecolor='black')
+
+plt.title('Histogram of Weights')
+
+plt.xlabel('Weight (kg)')
+
+plt.ylabel('Frequency')
+
+plt.show()
+
+# Fit a normal distribution to the data
+
+mu, std = norm.fit(weights)
+
+# Plot histogram and PDF
+
+plt.hist(weights, bins=15, density=True, alpha=0.6, color='b', edgecolor='black')
+
+x = np.linspace(40, 100, 100)
+
+p = norm.pdf(x, mu, std)
+
+plt.plot(x, p, 'k', linewidth=2)
+
+title = f"Fit results: mu = {mu:.2f},  std = {std:.2f}"
+
+plt.title(title)
+
+plt.xlabel('Weight (kg)')
+
+plt.ylabel('Density')
+
+plt.show()
+
+# standard mean =0 and std dev =1  is called standard normal distribution
+ # all the values are between 0 and 1 so are on the same scale
+ # z=x-mean/std dev and z=0 mean the value is exactly at the mean
+ # z+1 value is exactly one std dev deviation away from the mean
+ # z=-1 1 std dev away from from meam
+
+
+ # generate data for standard normal distribution
+x = np.linspace(-4, 4, 1000)
+
+y = norm.pdf(x, 0, 1)
+
+# Plot standard normal distribution
+
+plt.plot(x, y, label='Standard Normal Distribution')
+# Plot standard normal distribution
+
+plt.plot(x, y, label='Standard Normal Distribution')
+
+plt.fill_between(x, y, where=(x >= -1) & (x <= 1), color='yellow', alpha=0.5, label='1 std dev')
+
+plt.fill_between(x, y, where=(x >= -2) & (x <= 2), color='green', alpha=0.5, label='2 std devs')
+
+plt.fill_between(x, y, where=(x >= -3) & (x <= 3), color='blue', alpha=0.5, label='3 std devs')
+
+plt.title('Standard Normal Distribution with Standard Deviations')
+
+plt.xlabel('x')
+
+plt.ylabel('Density')
+
+plt.legend()
+
+plt.show()
+
+# around 68 % percent of data lies within one standard deviation from the mean
+# around 95 % percent of the data lies within 2 std dev form the mean
+# around 99 % of data lies within three  std dev from the mean
+# mean =0 and std dev is =1
+
+# CENTRAL
