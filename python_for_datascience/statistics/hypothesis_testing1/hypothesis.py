@@ -91,4 +91,5 @@ p_value=2*norm.cdf(z)
 print(p_value)
 # p value (8.18 ) > alpha (0.5) so we accept the hypothesis
 
+# stepts 
 
