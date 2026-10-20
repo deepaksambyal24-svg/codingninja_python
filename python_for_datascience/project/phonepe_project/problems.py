@@ -4,6 +4,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 from scipy import stats
+from scipy.constants import alpha
+
 df=pd.read_excel('phonepe.xlsx')
 
 excel_file = pd.ExcelFile('phonepe.xlsx')
@@ -172,4 +174,84 @@ states=ttl_app_open['State'].unique()
 
 # 2.7) -------. distribution of transaction types
 
+recent_year=txn_type['Year'].max()
+recent_qtr=txn_type.loc[txn_type['Year']==recent_year,'Quarter'].max()
+filter_d=txn_type[(txn_type['Year']==recent_year) & (txn_type['Quarter']==recent_qtr)]
 
+txn_distribution = filter_d.groupby(['State', 'Transaction Type']).size().reset_index(name='Count')
+
+# plt.figure(figsize=(18, 8))
+# sns.barplot(data=txn_distribution, x='State', y='Count', hue='Transaction Type')
+# plt.title('Distribution of Transaction Types by State')
+# plt.xticks(rotation=90)
+# plt.tight_layout()
+# plt.show()
+
+# 2.8) ------> Find unique Mapping between district name and district code
+
+# a) --> identify the uniqye mapping between district names and district code
+code_dist=demography.drop_duplicates(subset=demography[['District','Code']],keep='first')[['State','District','Code']]
+code_dist.index=range(1,len(code_dist)+1)
+import os
+file_name='district_code_mapping.csv'
+
+if os.path.exists(file_name):
+    print('File exists')
+else:
+    code_dist.to_csv('district_code_mapping.csv',index=False)
+
+
+
+
+########################################################################################################################
+# TASK 3 --------->
+
+# 3.1 ) ---> ENSURE DATA CONSISTENCY ACROSS STATE AND DISTRICT LEVELS
+summary_user=pd.pivot_table(data=district_txn,index='State',values=
+['Transactions','Amount (INR)','Registered Users'],
+               aggfunc={'Transactions':'sum','Amount (INR)':'sum','Registered Users':'sum'})
+
+summary_user = summary_user.rename(columns={'Transactions': 'Total_txns','Amount (INR)': 'Total_amt_(CR)','Registered Users': 'Total_reg_user'})
+
+summary_user['Total_amt_(CR)']=(summary_user['Total_amt_(CR)']/10000000).round(2)
+summary_user = summary_user.reset_index()
+summary_user.index = range(1, len(summary_user) + 1)
+print(summary_user)
+
+# B) ----> STATE LEVEL
+state_level=pd.pivot_table(data=txn,index='State',values=['Transactions','Amount (INR)'],aggfunc={'Transactions':'sum','Amount (INR)':'sum'},)
+
+state_level=state_level.rename(columns={'Transactions':'Total_state_txns','Amount (INR)':'Total_state_amount_cr'})
+state_level['Total_state_amount_cr'] = ( state_level['Total_state_amount_cr'] / 10000000).round(2)
+state_level = state_level.reset_index()
+state_level.index = range(1, len(state_level) + 1)
+print(state_level)
+
+# 3 ) --- find the discrepancies in both State and district data
+compare_data = pd.merge(summary_user,state_level,on='State',how='outer',indicator=True)
+compare_data['Txn_Difference'] = (compare_data['Total_txns'] - compare_data['Total_state_txns'])
+compare_data['Amount_Difference_CR'] = (compare_data['Total_amt_(CR)'] - compare_data['Total_state_amount_cr']).round(2)
+compare_data['Txn_Status'] = np.where(compare_data['Txn_Difference'] > 0,'District-level is greater',
+    np.where( compare_data['Txn_Difference'] < 0,'State-level is greater', 'Both are equal' ))
+compare_data.index = range(1, len(compare_data) + 1)
+print(compare_data[['State', 'Txn_Difference', 'Txn_Status']])
+
+########################################################################################################################
+# TASK 4 ------- >Corelate population density with transaction volume
+
+#1 --- merge the district_txn_uers and district demographics
+dist_demo=pd.merge(district_txn,demography,on='Code',how='right',indicator=True )
+corre=dist_demo['Transactions'].corr(dist_demo['Density'])
+print(f' Correlation between population density and transaction volume is : {corre.round(2)}')
+
+
+# 3 ) --- > plot scatter plot to visualize the  correlation between population density and transaction volume
+
+sns.scatterplot(data=dist_demo,x='Density',y='Transactions',color ='teal',s=100 , alpha=0.7,edgecolor='black',linewidth=.5)
+plt.title('Population Density vs Transaction Volume', fontsize=16)
+plt.xlabel('Population Density', fontsize=12)
+plt.ylabel('Transaction Volume', fontsize=12)
+
+plt.grid(True, linestyle='--', alpha=0.3)
+plt.tight_layout()
+plt.show()
