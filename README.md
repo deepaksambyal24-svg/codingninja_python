@@ -1,17 +1,32 @@
-# Python Learning & Problem-Solving
+# Python & Data Science Learning Portfolio
 
-A structured collection of Python practice, data structures and algorithms, object-oriented programming, and data-analysis exercises.
+A structured portfolio of Python practice, data structures and algorithms, object-oriented programming, and introductory data-science work.
 
-This repository documents an ongoing learning journey. The examples are primarily independent practice files and course exercises, rather than a single installable application.
+The repository records an ongoing learning journey. It contains independent exercises as well as selected documented projects; not every historical script is production-ready or independently tested.
 
-## Learning areas
+## Data science focus
+
+Start with the [Data Science & Data Analysis guide](04-data-science-and-analysis/README.md).
+
+**Featured runnable project:** [Vehicle Rental Pricing — Exploratory Data Analysis](04-data-science-and-analysis/projects/vehicle-rental-pricing-eda/README.md). This project demonstrates dataset validation, descriptive statistics, grouped analysis, visualizations, and automated tests using a small included sample dataset.
+
+Data-science topics covered include:
+- Python, Pandas and NumPy
+- Data cleaning, missing-value handling and data validation
+- Exploratory data analysis and descriptive statistics
+- Matplotlib and Seaborn visualizations
+- Sampling, probability and hypothesis-testing concepts
+- Introductory data-science and API experiments
+
+> The featured vehicle-rental dataset has only 12 sample rows. Its results demonstrate the workflow and should not be interpreted as statistically reliable market or pricing conclusions.
+
+## Other learning areas
 
 | Area | Topics |
 |---|---|
-| Python fundamentals | Variables, conditionals, loops, functions, strings, lists, dictionaries, sets, tuples and patterns |
+| Python fundamentals | Variables, conditionals, loops, functions, strings, lists, dictionaries, sets and tuples |
 | Object-oriented programming | Classes, constructors, inheritance, abstraction and polymorphism |
 | Data structures & algorithms | Arrays, linked lists, stacks, queues, trees, recursion, searching, sorting and complexity |
-| Data science & analysis | Python data analysis, statistics, notebooks and datasets |
 | AI & API experiments | Prompt engineering and introductory API experiments |
 
 ## Repository structure
@@ -21,50 +36,64 @@ This repository documents an ongoing learning journey. The examples are primaril
 02-oop-and-python-concepts/
 03-data-structures-and-algorithms/
 04-data-science-and-analysis/
+    README.md
+    datasets/
+    functions/
+    notebooks/
+    projects/
 05-ai-and-api-experiments/
 06-miscellaneous/
 archive/
 ```
 
-Each topic folder keeps the original exercises grouped by subject. The `archive/` folder retains older or duplicated material so that learning history is not silently discarded.
+Historical and duplicate learning material is retained in topic folders or `archive/` rather than silently discarded.
 
 ## Getting started
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/deepaksambyal24-svg/codingninja_python.git
-   cd codingninja_python
-   ```
-2. Use a virtual environment for experiments:
-   ```bash
-   python -m venv .venv
-   # Windows PowerShell:
-   .venv\Scripts\Activate.ps1
-   # macOS / Linux:
-   source .venv/bin/activate
-   ```
-3. Run an individual exercise:
-   ```bash
-   python path/to/example.py
-   ```
+Clone the repository and create a virtual environment:
 
-Some exercises expect input from the terminal or use course-specific conventions. Run files individually and review their input/output requirements before execution.
+```bash
+git clone https://github.com/deepaksambyal24-svg/codingninja_python.git
+cd codingninja_python
+python -m venv .venv
+```
 
-## How to use this repository
+Activate it:
 
-- Browse a topic folder to find related examples.
-- Treat each script as a small, focused exercise.
-- Compare alternative implementations where multiple solutions exist.
-- Add tests and explanations as exercises are refined.
-- Keep datasets and notebooks alongside the data-analysis topic they support.
+```bash
+# Windows PowerShell
+.venv\\Scripts\\Activate.ps1
 
-## Current status
+# macOS / Linux
+source .venv/bin/activate
+```
 
-This is a learning repository that is being progressively organized and improved. Not every exercise is production-ready or independently tested. The next improvement areas are consistent naming, concise explanations, tests for selected solutions, and a small number of end-to-end portfolio projects.
+Run an individual exercise with `python path/to/example.py`. Some historical scripts require course-specific input files or interactive terminal input; check the relevant project README before running them.
+
+## Run the featured data-science project
+
+Install its dependencies:
+
+```bash
+python -m pip install pandas matplotlib pytest
+```
+
+Run the analysis and tests:
+
+```bash
+python 04-data-science-and-analysis/projects/vehicle-rental-pricing-eda/analysis.py
+python -m pytest 04-data-science-and-analysis/projects/vehicle-rental-pricing-eda/tests -v
+```
+
+## Quality and scope
+
+- Project documentation identifies datasets and execution requirements.
+- The featured project includes input validation and unit tests.
+- Generated charts are written to a local outputs directory and are not committed.
+- Learning scripts are being improved incrementally; their presence does not imply production readiness.
 
 ## Author
 
 **Deepak Sambyal**
 
 - GitHub: [@deepaksambyal24-svg](https://github.com/deepaksambyal24-svg)
-
